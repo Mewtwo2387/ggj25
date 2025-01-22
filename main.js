@@ -98,32 +98,35 @@ class Bubble {
     }
 
     draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = this.gradient;
-    ctx.fill();
-    ctx.closePath();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.gradient;
+        ctx.fill();
+        ctx.closePath();
 
-    ctx.font = `${this.radius * 0.5}px Arial`;
-    ctx.fillStyle = '#000';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(`$${Math.floor(this.currentValue)}`, this.x, this.y);
+        ctx.font = `${this.radius * 0.5}px Arial`;
+        ctx.fillStyle = '#000';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`$${Math.floor(this.currentValue)}`, this.x, this.y);
     }
 
     update() {
         this.y -= this.speed * gameData.riseSpeed;
-        this.radius += this.baseRadius * 0.01;
+        this.radius += this.baseRadius * (0.01 * gameData.riseSpeed);
         this.currentValue += this.baseValue * 0.01;
         this.gradient = this.createGradient();
     }
 }
 
 function spawnBubble() {
+    if (!document.hasFocus()) {
+        return;
+    }
     let x, y;
     do {
-    x = Math.random() * (canvas.width - 20) + 10;
-    y = canvas.height + 20;
+        x = Math.random() * (canvas.width - 20) + 10;
+        y = canvas.height + 20;
     } while (x < uiBounds.x + uiBounds.width && y < uiBounds.y + uiBounds.height);
 
     const random = Math.random();
@@ -131,18 +134,19 @@ function spawnBubble() {
     const baseRadius = random * 10 + 10;
     const speed = Math.random() * 1 + 1;
     gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed));
+    console.log(gameData.bubbles);
 }
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     gameData.bubbles.forEach((bubble, index) => {
-    bubble.update();
-    bubble.draw();
+        bubble.update();
+        bubble.draw();
 
-    if (bubble.y + bubble.radius < 0) {
-        gameData.bubbles.splice(index, 1);
-    }
+        if (bubble.y + bubble.radius < 0) {
+            gameData.bubbles.splice(index, 1);
+        }
     });
 
     requestAnimationFrame(gameLoop);
