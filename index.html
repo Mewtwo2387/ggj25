@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubble</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <button id="toggleButton"><</button>
+  <div id="ui">
+    <div id="credits-container">
+      <span id="credits-label">Credits:</span>
+      <span id="credits">$0</span>
+    </div>
+    <button id="upgrade1" class="upgrade">
+      <span class="upgrade-header">Increase Maximum Base Value</span>
+      <span class="upgrade-details">Cost: $50 | Level: 1 | Base Value: $10 | Next: $15</span>
+    </button>
+    <button id="upgrade2" class="upgrade">
+      <span class="upgrade-header">Decrease Spawn Interval</span>
+      <span class="upgrade-details">Cost: $100 | Level: 1 | Interval: 3000ms | Next: 2700ms</span>
+    </button>
+    <button id="upgrade3" class="upgrade">
+      <span class="upgrade-header">Decrease Bubble Rise Speed</span>
+      <span class="upgrade-details">Cost: $150 | Level: 1 | Multiplier: 1.0 | Next: 0.9</span>
+    </button>
+  </div>
+  <canvas id="gameCanvas"></canvas>
+  <div id="savePopup" class="hidden">Game Saved!</div>
+</body>
+</html>

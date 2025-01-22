@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to top, #87CEEB, #f0f8ff);
+}
+
+#gameCanvas {
+  display: block;
+}
+
+#ui {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #333;
+  font-size: 18px;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#ui.hidden {
+  transform: translateX(-320px);
+  opacity: 0;
+}
+
+#toggleButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #45a049aa;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s;
+  z-index: 1000;
+}
+
+#toggleButton:hover {
+  background: #45a049;
+}
+
+#credits-container {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #4CAF50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#credits-label {
+  font-size: 18px;
+  color: #333;
+}
+
+.upgrade {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background 0.3s;
+}
+
+.upgrade:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #8364f0, #3c9dff);
+}
+
+.upgrade:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.upgrade-header {
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
+}
+
+.upgrade-details {
+  font-size: 14px;
+  color: #e0e0e0;
+  margin-top: 5px;
+}
+
+#savePopup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  z-index: 1000;
+}
+
+#savePopup.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
