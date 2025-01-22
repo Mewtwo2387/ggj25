@@ -4,6 +4,7 @@ const creditsElement = document.getElementById('credits');
 const upgrade1Button = document.getElementById('upgrade1');
 const upgrade2Button = document.getElementById('upgrade2');
 const upgrade3Button = document.getElementById('upgrade3');
+const spikeupgradeButton = document.getElementById('spikeupgrade');
 const ui = document.getElementById('ui');
 const toggleButton = document.getElementById('toggleButton');
 const savePopup = document.getElementById('savePopup');
@@ -47,6 +48,8 @@ class GameData {
         this.upgrade1Cost = 50;
         this.upgrade2Cost = 100;
         this.upgrade3Cost = 150;
+
+        this.spike = false;
     }
 }
 
@@ -87,6 +90,7 @@ class Bubble {
         this.currentValue = baseValue;
         this.speed = speed;
         this.gradient = this.createGradient();
+        this.popping = false;
     }
 
     createGradient() {
@@ -95,6 +99,10 @@ class Bubble {
         gradient.addColorStop(0.5, 'rgba(173, 216, 230, 0.8)');
         gradient.addColorStop(1, 'rgba(70, 130, 180, 0.8)');
         return gradient;
+    }
+
+    pop() {
+        this.popping = true;
     }
 
     draw() {
@@ -112,10 +120,18 @@ class Bubble {
     }
 
     update() {
-        this.y -= this.speed * gameData.riseSpeed;
-        this.radius += this.baseRadius * (0.01 * gameData.riseSpeed);
-        this.currentValue += this.baseValue * 0.01;
+        if (this.popping) {
+            this.radius -= this.baseRadius * 0.1;
+            if (this.radius <= 0) {
+                return true;
+            }
+        } else {
+            this.y -= this.speed * gameData.riseSpeed;
+            this.radius += this.baseRadius * (0.01 * gameData.riseSpeed);
+            this.currentValue += this.baseValue * 0.01;
+        }
         this.gradient = this.createGradient();
+        return false;
     }
 }
 
@@ -137,12 +153,45 @@ function spawnBubble() {
     console.log(gameData.bubbles);
 }
 
+function drawSpikes() {
+    const spikeWidth = 20;
+    const spikeHeight = 10;
+    const spikeCount = Math.ceil(canvas.width / spikeWidth);
+
+    ctx.fillStyle = '#a33';
+    for (let i = 0; i < spikeCount; i++) {
+        const x = i * spikeWidth;
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x + spikeWidth / 2, spikeHeight);
+        ctx.lineTo(x + spikeWidth, 0);
+        ctx.closePath();
+        ctx.fill();
+    }
+}
+
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    if (gameData.spike) {
+        drawSpikes();
+    }
+
     gameData.bubbles.forEach((bubble, index) => {
-        bubble.update();
+        if(bubble.update()){
+            gameData.bubbles.splice(index, 1);
+            return;
+        }
         bubble.draw();
+
+        if (bubble.y - bubble.radius < 0) {
+            if (gameData.spike) {
+                gameData.credits += Math.floor(bubble.currentValue * 0.5);
+                updateCreditsDisplay();
+            }
+            bubble.pop();
+            return;
+        }
 
         if (bubble.y + bubble.radius < 0) {
             gameData.bubbles.splice(index, 1);
@@ -165,7 +214,7 @@ canvas.addEventListener('click', (e) => {
         if (dist < bubble.radius) {
             gameData.credits += Math.floor(bubble.currentValue);
             updateCreditsDisplay();
-            gameData.bubbles.splice(index, 1);
+            bubble.pop();
         }
     });
 });
@@ -205,6 +254,15 @@ upgrade3Button.addEventListener('click', () => {
     }
 });
 
+spikeupgrade.addEventListener('click', () => {
+    if (gameData.credits >= 10000 && !gameData.spike) {
+        gameData.credits -= 10000;
+        gameData.spike = true;
+        updateCreditsDisplay();
+        updateUpgradeButtons();
+    }
+});
+
 document.addEventListener('keydown', (e) => {
     if (e.key === 's' || e.key === 'S') {
         saveGameState();
@@ -219,6 +277,9 @@ function updateUpgradeButtons() {
     upgrade1Button.querySelector('.upgrade-details').textContent = `Cost: $${formatNumber(gameData.upgrade1Cost)} | Level: ${gameData.upgrade1Level} | Base Value: $${formatNumber(gameData.maxBaseValue)} | Next: $${formatNumber(gameData.maxBaseValue + 5)}`;
     upgrade2Button.querySelector('.upgrade-details').textContent = `Cost: $${formatNumber(gameData.upgrade2Cost)} | Level: ${gameData.upgrade2Level} | Interval: ${formatNumber(gameData.spawnInterval)}ms | Next: ${formatNumber(gameData.spawnInterval * 0.9)}ms`;
     upgrade3Button.querySelector('.upgrade-details').textContent = `Cost: $${formatNumber(gameData.upgrade3Cost)} | Level: ${gameData.upgrade3Level} | Rise Speed: ${formatNumber(gameData.riseSpeed)} | Next: ${formatNumber(gameData.riseSpeed * 0.9)}`;
+    if (gameData.spike) {
+        spikeupgradeButton.disabled = true;
+    }
 }
 
 function formatNumber(num) {
