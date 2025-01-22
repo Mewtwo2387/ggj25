@@ -191,6 +191,9 @@ function spawnBlueBubble() {
 }
 
 function spawnGreenBubble() {
+    if (!document.hasFocus()) {
+        return;
+    }
     let x, y;
     do {
         x = Math.random() * (canvas.width - 20) + 10;
@@ -240,8 +243,8 @@ function gameLoop() {
             if (gameData.spike) {
                 gameData.credits += Math.floor(bubble.currentValue * 0.5);
                 updateCreditsDisplay();
+                bubble.pop();
             }
-            bubble.pop();
             return;
         }
 
