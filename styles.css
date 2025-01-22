@@ -65,7 +65,6 @@ body {
 .upgrade {
   margin-top: 10px;
   padding: 10px 12px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: white;
   border: none;
   border-radius: 8px;
@@ -75,10 +74,25 @@ body {
   transition: transform 0.2s, background 0.3s;
 }
 
+.upgrade.blue {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+.upgrade.green {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+}
+
 .upgrade:hover {
   transform: translateY(-3px);
+}
+
+.upgrade.blue:hover {
   background: linear-gradient(135deg, #8364f0, #3c9dff);
 }
+
+.upgrade.green:hover {
+  background: linear-gradient(135deg, #66bb6a, #a5d6a7);
+} 
 
 .upgrade:disabled {
   background: #aaa;
@@ -88,12 +102,12 @@ body {
 
 .upgrade-header {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   display: block;
 }
 
 .upgrade-details {
-  font-size: 14px;
+  font-size: 12px;
   color: #e0e0e0;
   margin-top: 5px;
 }
@@ -115,4 +129,19 @@ body {
 #savePopup.hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+.upgrade-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.upgrade-row.hidden {
+  display: none;
+}
+
+.upgrade-column {
+  flex: 1;
+  margin: 0 5px;
 }
