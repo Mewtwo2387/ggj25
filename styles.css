@@ -15,12 +15,14 @@ body {
   left: 10px;
   color: #333;
   font-size: 18px;
-  width: 300px;
+  width: 400px;
+  height: 400px;
   background: rgba(255, 255, 255, 0.6);
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: height 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
 }
 
 #ui.hidden {
@@ -28,10 +30,22 @@ body {
   opacity: 0;
 }
 
+#ui.collapsed {
+  height: 22.5px;
+}
+
+#ui.collapsed #credits-container{
+  margin-bottom: 0px;
+}
+
+#ui.collapsed .upgrade-row{
+  display: none;
+}
+
 #toggleButton {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 3px;
+  left: 3px;
   background: #45a049aa;
   color: white;
   border: none;
@@ -41,6 +55,7 @@ body {
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
   transition: background 0.3s;
   z-index: 1000;
+  line-height: 10px;
 }
 
 #toggleButton:hover {

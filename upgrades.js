@@ -99,12 +99,18 @@ spikeupgrade.addEventListener('click', () => {
 });
 
 function updateUpgradeButtons() {
-  blueUpgrade1Button.querySelector('.upgrade-details').textContent = `Cost: $${formatNumber(gameData.blueUpgrade1Cost)} \n Level: ${gameData.blueUpgrade1Level} \n Value: $${formatNumber(gameData.blueMaxBaseValue)} \n Next: $${formatNumber(gameData.blueMaxBaseValue + 5)}`;
-  blueUpgrade2Button.querySelector('.upgrade-details').textContent = `Cost: $${formatNumber(gameData.blueUpgrade2Cost)} \n Level: ${gameData.blueUpgrade2Level} \n Interval: ${formatNumber(gameData.blueSpawnInterval)}ms \n Next: ${formatNumber(gameData.blueSpawnInterval * 0.9)}ms`;
-  blueUpgrade3Button.querySelector('.upgrade-details').textContent = `Cost: $${formatNumber(gameData.blueUpgrade3Cost)} \n Level: ${gameData.blueUpgrade3Level} \n Speed: ${formatNumber(gameData.blueRiseSpeed)} \n Next: ${formatNumber(gameData.blueRiseSpeed * 0.9)}`;
-  greenUpgrade1Button.querySelector('.upgrade-details').textContent = `Cost: $${formatNumber(gameData.greenUpgrade1Cost)} \n Level: ${gameData.greenUpgrade1Level} \n Value: $${formatNumber(gameData.greenMaxBaseValue)} \n Next: $${formatNumber(gameData.greenMaxBaseValue + 50)}`;
-  greenUpgrade2Button.querySelector('.upgrade-details').textContent = `Cost: $${formatNumber(gameData.greenUpgrade2Cost)} \n Level: ${gameData.greenUpgrade2Level} \n Interval: ${formatNumber(gameData.greenSpawnInterval)}ms \n Next: ${formatNumber(gameData.greenSpawnInterval * 0.9)}ms`;
-  greenUpgrade3Button.querySelector('.upgrade-details').textContent = `Cost: $${formatNumber(gameData.greenUpgrade3Cost)} \n Level: ${gameData.greenUpgrade3Level} \n Speed: ${formatNumber(gameData.greenRiseSpeed)} \n Next: ${formatNumber(gameData.greenRiseSpeed * 0.9)}`;
+  blueUpgrade1Button.querySelector('.upgrade-details').innerHTML = `Cost: $${formatNumber(gameData.blueUpgrade1Cost)}<br>Value: $${formatNumber(gameData.blueMaxBaseValue)}<br>Next: $${formatNumber(gameData.blueMaxBaseValue + 5)}`;
+  blueUpgrade2Button.querySelector('.upgrade-details').innerHTML = `Cost: $${formatNumber(gameData.blueUpgrade2Cost)}<br>Interval: ${formatNumber(gameData.blueSpawnInterval)}ms<br>Next: ${formatNumber(gameData.blueSpawnInterval * 0.9)}ms`;
+  blueUpgrade3Button.querySelector('.upgrade-details').innerHTML = `Cost: $${formatNumber(gameData.blueUpgrade3Cost)}<br>Speed: ${formatNumber(gameData.blueRiseSpeed)}<br>Next: ${formatNumber(gameData.blueRiseSpeed * 0.9)}`;
+  greenUpgrade1Button.querySelector('.upgrade-details').innerHTML = `Cost: $${formatNumber(gameData.greenUpgrade1Cost)}<br>Value: $${formatNumber(gameData.greenMaxBaseValue)}<br>Next: $${formatNumber(gameData.greenMaxBaseValue + 50)}`;
+  greenUpgrade2Button.querySelector('.upgrade-details').innerHTML = `Cost: $${formatNumber(gameData.greenUpgrade2Cost)}<br>Interval: ${formatNumber(gameData.greenSpawnInterval)}ms<br>Next: ${formatNumber(gameData.greenSpawnInterval * 0.9)}ms`;
+  greenUpgrade3Button.querySelector('.upgrade-details').innerHTML = `Cost: $${formatNumber(gameData.greenUpgrade3Cost)}<br>Speed: ${formatNumber(gameData.greenRiseSpeed)}<br>Next: ${formatNumber(gameData.greenRiseSpeed * 0.9)}`;
+  blueUpgrade1Button.querySelector('.upgrade-header').innerHTML = `Value Lv ${gameData.blueUpgrade1Level}`;
+  blueUpgrade2Button.querySelector('.upgrade-header').innerHTML = `Interval Lv ${gameData.blueUpgrade2Level}`;
+  blueUpgrade3Button.querySelector('.upgrade-header').innerHTML = `Speed Lv ${gameData.blueUpgrade3Level}`;
+  greenUpgrade1Button.querySelector('.upgrade-header').innerHTML = `Value Lv ${gameData.greenUpgrade1Level}`;
+  greenUpgrade2Button.querySelector('.upgrade-header').innerHTML = `Interval Lv ${gameData.greenUpgrade2Level}`;
+  greenUpgrade3Button.querySelector('.upgrade-header').innerHTML = `Speed Lv ${gameData.greenUpgrade3Level}`;
   if (gameData.green) {
       greenRow.classList.remove('hidden');
       unlockGreenRow.classList.add('hidden');

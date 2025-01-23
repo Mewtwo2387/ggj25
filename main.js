@@ -17,16 +17,16 @@ const uiBounds = {
     height: 150
 };
 
-let uiVisible = true;
+let uiCollapsed = true;
 
 toggleButton.addEventListener('click', () => {
-    uiVisible = !uiVisible;
-    if (uiVisible) {
-        toggleButton.textContent = '<';
-        ui.classList.remove('hidden');
+    uiCollapsed = !uiCollapsed;
+    if (uiCollapsed) {
+        toggleButton.textContent = '^';
+        ui.classList.remove('collapsed');
     } else {
-        toggleButton.textContent = '>';
-        ui.classList.add('hidden');
+        toggleButton.textContent = 'v';
+        ui.classList.add('collapsed');
     }
 });
 
