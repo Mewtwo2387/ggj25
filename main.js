@@ -204,6 +204,13 @@ window.addEventListener('click', (event) => {
     }
 });
 
+document.getElementById('resetButton').addEventListener('click', () => {
+    if (document.getElementById('confirmReset').value === 'reset') {
+        localStorage.clear();
+        location.reload();
+    }
+});
+
 loadGameState();
 gameLoop();
 updateUpgradeButtons();

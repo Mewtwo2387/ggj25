@@ -185,7 +185,7 @@ body {
 }
 
 #settingsButton:hover, #aboutButton:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(233, 233, 233, 0.8);
   color: #000;
 }
 
@@ -236,4 +236,16 @@ body {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#resetButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#resetButton:hover {
+  background-color: #28a745;
 }
