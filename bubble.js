@@ -23,6 +23,10 @@ class Bubble {
           gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
           gradient.addColorStop(0.5, 'rgba(144, 238, 144, 0.8)');
           gradient.addColorStop(1, 'rgba(60, 179, 113, 0.8)');
+      } else if (this.colour === 'red') {
+          gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+          gradient.addColorStop(0.5, 'rgba(255, 105, 105, 0.8)');
+          gradient.addColorStop(1, 'rgba(255, 0, 0, 0.8)');
       }
       return gradient;
   }
@@ -53,8 +57,13 @@ class Bubble {
           }
       } else {
           this.y -= this.speed;
-          this.radius += this.baseRadius * (0.01 * this.baseSpeed);
-          this.currentValue += this.baseValue * 0.01;
+          if (this.water) {
+            this.radius += this.baseRadius * (0.02 * this.baseSpeed);
+            this.currentValue += this.baseValue * 0.02;
+          } else {
+            this.radius += this.baseRadius * (0.01 * this.baseSpeed);
+            this.currentValue += this.baseValue * 0.01;
+          }
       }
       this.gradient = this.createGradient();
       return false;
@@ -91,8 +100,26 @@ function spawnGreenBubble() {
 
   const random = Math.random();
   const baseValue = random * gameData.greenMaxBaseValue;
-  const baseRadius = random * 10 + 10;
+  const baseRadius = random * 5 + 5;
   const speed = (Math.random() * 1 + 1) * gameData.greenRiseSpeed;
   gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'green'));
   console.log(gameData.bubbles);
+}
+
+function spawnRedBubble() {
+    if (!document.hasFocus()) {
+        return;
+    }
+    let x, y;
+    do {
+        x = Math.random() * (canvas.width - 20) + 10;
+        y = canvas.height + 20;
+    } while (x < uiBounds.x + uiBounds.width && y < uiBounds.y + uiBounds.height);
+
+    const random = Math.random();
+    const baseValue = random * gameData.redMaxBaseValue;
+    const baseRadius = random * 3 + 3;
+    const speed = (Math.random() * 1 + 1) * gameData.redRiseSpeed;
+    gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'red'));
+    console.log(gameData.bubbles);
 }

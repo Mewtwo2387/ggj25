@@ -5,6 +5,10 @@ body {
   background: linear-gradient(to top, #87CEEB, #f0f8ff);
 }
 
+body.water {
+  background: linear-gradient(to top, #2575fc, #87CEEB);
+}
+
 #gameCanvas {
   display: block;
 }
@@ -16,7 +20,7 @@ body {
   color: #333;
   font-size: 18px;
   width: 400px;
-  height: 400px;
+  height: 450px;
   background: rgba(255, 255, 255, 0.6);
   padding: 15px;
   border-radius: 10px;
@@ -97,6 +101,10 @@ body {
   background: linear-gradient(135deg, #4CAF50, #8BC34A);
 }
 
+.upgrade.red {
+  background: linear-gradient(135deg, #ff0000, #ff6666);
+}
+
 .upgrade:hover {
   transform: translateY(-3px);
 }
@@ -108,6 +116,10 @@ body {
 .upgrade.green:hover {
   background: linear-gradient(135deg, #66bb6a, #a5d6a7);
 } 
+
+.upgrade.red:hover {
+  background: linear-gradient(135deg, #ff3333, #ff9999);
+}
 
 .upgrade:disabled {
   background: #aaa;

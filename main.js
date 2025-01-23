@@ -6,6 +6,7 @@ const toggleButton = document.getElementById('toggleButton');
 const savePopup = document.getElementById('savePopup');
 let blueSpawnIntervalId = null;
 let greenSpawnIntervalId = null;
+let redSpawnIntervalId = null;
 
 const settingsButton = document.getElementById('settingsButton');
 const settingsModal = document.getElementById('settingsModal');
@@ -54,7 +55,7 @@ class GameData {
         this.blueUpgrade3Cost = 150;
 
         this.greenMaxBaseValue = 100;
-        this.greenSpawnInterval = 5000;
+        this.greenSpawnInterval = 10000;
         this.greenRiseSpeed = 1;
 
         this.greenUpgrade1Level = 1;
@@ -65,8 +66,22 @@ class GameData {
         this.greenUpgrade2Cost = 2000;
         this.greenUpgrade3Cost = 3000;
 
+        this.redMaxBaseValue = 1000;
+        this.redSpawnInterval = 30000;
+        this.redRiseSpeed = 1;
+
+        this.redUpgrade1Level = 1;
+        this.redUpgrade2Level = 1;
+        this.redUpgrade3Level = 1;
+
+        this.redUpgrade1Cost = 20000;
+        this.redUpgrade2Cost = 40000;
+        this.redUpgrade3Cost = 60000;
+
         this.green = false;
+        this.red = false;
         this.spike = false;
+        this.water = false;
     }
 }
 
@@ -85,6 +100,9 @@ function loadGameState() {
         blueSpawnIntervalId = setInterval(spawnBlueBubble, gameData.blueSpawnInterval);
         if (gameData.green) {
             greenSpawnIntervalId = setInterval(spawnGreenBubble, gameData.greenSpawnInterval);
+        }
+        if (gameData.red) {
+            redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval);
         }
         updateCreditsDisplay();
         updateUpgradeButtons();
