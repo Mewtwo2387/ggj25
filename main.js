@@ -211,7 +211,24 @@ document.getElementById('resetButton').addEventListener('click', () => {
     }
 });
 
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const target = button.getAttribute('data-tab');
+
+        tabContents.forEach(content => {
+            content.classList.add('hidden');
+            if (content.id === target) {
+                content.classList.remove('hidden');
+            }
+        });
+    });
+});
+
 loadGameState();
 gameLoop();
 updateUpgradeButtons();
+document.querySelector('.tab-button[data-tab="bubble-upgrades"]').click();
 setInterval(saveGameState, 10000);

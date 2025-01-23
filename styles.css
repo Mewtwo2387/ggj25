@@ -249,3 +249,26 @@ body {
 #resetButton:hover {
   background-color: #28a745;
 }
+
+#tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.tab-button {
+  background: #f0f8ff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.tab-button:hover {
+  background: #e0e0e0;
+}
+
+.tab-content.hidden {
+  display: none;
+}
