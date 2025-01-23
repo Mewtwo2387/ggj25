@@ -11,6 +11,8 @@
 </head>
 <body>
   <button id="toggleButton">^</button>
+  <button id="settingsButton">Settings</button>
+  <button id="aboutButton">About</button>
   <div id="ui">
     <div id="credits-container">
       <span id="credits-label">Credits:</span>
@@ -71,5 +73,19 @@
   </div> <!-- ui -->
   <canvas id="gameCanvas"></canvas>
   <div id="savePopup" class="hidden">Game Saved!</div>
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Settings</h2>
+      <p>Settings content goes here...</p>
+    </div>
+  </div> <!-- settingsModal -->
+  <div id="aboutModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>About</h2>
+      <p>About content goes here...</p>
+    </div>
+  </div>
 </body>
 </html>

@@ -7,6 +7,12 @@ const savePopup = document.getElementById('savePopup');
 let blueSpawnIntervalId = null;
 let greenSpawnIntervalId = null;
 
+const settingsButton = document.getElementById('settingsButton');
+const settingsModal = document.getElementById('settingsModal');
+const closeButtons = document.querySelectorAll('.close-button');
+const aboutButton = document.getElementById('aboutButton');
+const aboutModal = document.getElementById('aboutModal');
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -173,6 +179,30 @@ function updateCreditsDisplay() {
 function formatNumber(num) {
     return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 3 });
 }
+
+settingsButton.addEventListener('click', () => {
+    settingsModal.classList.add('show');
+});
+
+aboutButton.addEventListener('click', () => {
+    aboutModal.classList.add('show');
+});
+
+closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        settingsModal.classList.remove('show');
+        aboutModal.classList.remove('show');
+    });
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === settingsModal) {
+        settingsModal.classList.remove('show');
+    }
+    if (event.target === aboutModal) {
+        aboutModal.classList.remove('show');
+    }
+});
 
 loadGameState();
 gameLoop();
