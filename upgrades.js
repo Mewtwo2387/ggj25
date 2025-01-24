@@ -25,6 +25,7 @@ const redAscendButton = document.getElementById('redAscend');
 
 const spikeupgradeButton = document.getElementById('spikeupgrade');
 const waterupgradeButton = document.getElementById('waterupgrade');
+const goldenupgradeButton = document.getElementById('goldenupgrade');
 
 blueUpgrade1Button.addEventListener('click', () => {
   if (gameData.credits >= gameData.blueUpgrade1Cost) {
@@ -220,6 +221,15 @@ waterupgradeButton.addEventListener('click', () => {
   }
 });
 
+goldenupgradeButton.addEventListener('click', () => {
+  if (gameData.credits >= 1000000 && !gameData.golden) {
+      gameData.credits -= 1000000;
+      gameData.golden = true;
+      updateCreditsDisplay();
+      updateUpgradeButtons();
+  }
+});
+
 function updateUpgradeDetails(button, level, cost, value, nextValue, label, ascensionLevel) {
   if (level < 20) {
     button.querySelector('.upgrade-details').innerHTML = `Cost: $${format(cost)}<br>${label}: ${format(value)}<br>Next: ${format(nextValue)}`;
@@ -271,6 +281,11 @@ function updateUpgradeButtons() {
   } else {
       document.body.classList.remove('water');
       waterupgradeButton.disabled = false;
+  }
+  if (gameData.golden) {
+    goldenupgradeButton.disabled = true;
+  } else {
+    goldenupgradeButton.disabled = false;
   }
   if (gameData.blueUpgrade1Level >= 20 && gameData.blueUpgrade2Level >= 20 && gameData.blueUpgrade3Level >= 20) {
     blueAscendRow.classList.remove('hidden');

@@ -88,6 +88,7 @@ class GameData {
         this.red = false;
         this.spike = false;
         this.water = false;
+        this.golden = false;
     }
 }
 

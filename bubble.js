@@ -27,6 +27,10 @@ class Bubble {
           gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
           gradient.addColorStop(0.5, 'rgba(255, 105, 105, 0.8)');
           gradient.addColorStop(1, 'rgba(255, 0, 0, 0.8)');
+      } else if (this.colour === 'golden') {
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+        gradient.addColorStop(0.5, 'rgba(255, 215, 0, 0.8)');
+        gradient.addColorStop(1, 'rgba(255, 215, 0, 0.8)');
       }
       return gradient;
   }
@@ -84,7 +88,15 @@ function spawnBlueBubble() {
   const baseValue = random * gameData.blueMaxBaseValue * gameData.blueBaseValueMultiplier;
   const baseRadius = random * 10 + 10;
   const speed = (Math.random() * 1 + 1) * gameData.blueRiseSpeed;
-  gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'blue'));
+  if (gameData.golden) {
+    if (Math.random() < 0.05) {
+      gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue * 20, speed, 'golden'));
+    } else {
+      gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'blue'));
+    }
+  } else {
+    gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'blue'));
+  }
   console.log(gameData.bubbles);
 }
 
@@ -102,7 +114,15 @@ function spawnGreenBubble() {
   const baseValue = random * gameData.greenMaxBaseValue * gameData.greenBaseValueMultiplier;
   const baseRadius = random * 5 + 5;
   const speed = (Math.random() * 1 + 1) * gameData.greenRiseSpeed;
-  gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'green'));
+  if (gameData.golden) {
+    if (Math.random() < 0.05) {
+      gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue * 20, speed, 'golden'));
+    } else {
+      gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'green'));
+    }
+  } else {
+    gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'green'));
+  }
   console.log(gameData.bubbles);
 }
 
@@ -120,6 +140,14 @@ function spawnRedBubble() {
     const baseValue = random * gameData.redMaxBaseValue * gameData.redBaseValueMultiplier;
     const baseRadius = random * 3 + 3;
     const speed = (Math.random() * 1 + 1) * gameData.redRiseSpeed;
-    gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'red'));
+    if (gameData.golden) {
+      if (Math.random() < 0.05) {
+        gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue * 20, speed, 'golden'));
+      } else {
+        gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'red'));
+      }
+    } else {
+      gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue, speed, 'red'));
+    }
     console.log(gameData.bubbles);
 }
