@@ -142,7 +142,38 @@ class WindParticle {
     }
 }
 
+class bubbleParticle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height;
+        this.radius = Math.random() * 2 + 2;
+        this.speed = Math.random() * 0.5 + 0.5;
+    }
+
+    update() {
+        this.x += this.speed * wind / Math.sqrt(this.radius);
+        this.y -= this.speed;
+        if (this.x > canvas.width) {
+            this.x = 0;
+        }
+        if (this.x < 0) {
+            this.x = canvas.width;
+        }
+        if (this.y < 0) {
+            this.y = canvas.height;
+        }
+    }
+
+    draw() {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+}
+
 const windParticles = Array.from({ length: 100 }, () => new WindParticle());
+const bubbleParticles = Array.from({ length: 50 }, () => new bubbleParticle());
 
 function saveGameState() {
     localStorage.setItem('gameState', JSON.stringify(gameData));
@@ -194,6 +225,37 @@ function drawSpikes() {
     }
 }
 
+function drawLightRays() {
+    const rayCount = 10; // Number of light rays
+    const rayWidth = 10; // Width of each ray
+    const rayLength = canvas.height; // Length of each ray
+    const angle = Math.PI / 6; // Angle for diagonal rays (30 degrees)
+
+    ctx.save();
+    ctx.globalCompositeOperation = 'overlay'; // Use overlay to blend the rays with the background
+
+    for (let i = 0; i < rayCount; i++) {
+        const startX = (canvas.width / rayCount) * i;
+        const endX = startX + Math.cos(angle) * rayLength;
+        const endY = Math.sin(angle) * rayLength;
+
+        const gradient = ctx.createLinearGradient(startX, 0, endX, endY);
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.moveTo(startX, 0);
+        ctx.lineTo(endX, endY);
+        ctx.lineTo(endX + rayWidth, endY);
+        ctx.lineTo(startX + rayWidth, 0);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    ctx.restore();
+}
+
 function gameLoop() {
     document.getElementById('windLabel').textContent = `Wind: ${format(wind)}`;
 
@@ -203,6 +265,13 @@ function gameLoop() {
         particle.update();
         particle.draw();
     });
+
+    bubbleParticles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+
+    drawLightRays();
 
     if (gameData.spike) {
         drawSpikes();
