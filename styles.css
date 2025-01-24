@@ -26,7 +26,34 @@ body.water {
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition: height 0.3s ease, opacity 0.3s ease;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#ui::-webkit-scrollbar {
+  width: 8px;
+}
+
+#ui::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#ui::-webkit-scrollbar-thumb {
+  background: rgba(51, 51, 51, 0.4); 
+  border-radius: 10px;
+}
+
+#ui::-webkit-scrollbar-thumb:hover {
+  background: rgba(51, 51, 51, 0.6); 
+}
+
+#ui::-webkit-scrollbar-button {
+  display: none;
+}
+
+#ui {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(51, 51, 51, 0.4) transparent;
 }
 
 #ui.hidden {

@@ -21,10 +21,11 @@
     <div class="upgrade-row">
       <button class="tab-button" data-tab="bubble-upgrades">Bubble Upgrades</button>
       <button class="tab-button" data-tab="special-upgrades">Special Upgrades</button>
+      <button class="tab-button" data-tab="ascension-upgrades">Ascension Upgrades</button>
       <button class="tab-button" data-tab="singularity-upgrades">Singularity Upgrades</button>
     </div>
     <div id="bubble-upgrades" class="tab-content">
-      <div class="upgrade-row">
+      <div id="blue-upgrades" class="upgrade-row">
         <div class="upgrade-column">
           <button id="blueUpgrade1" class="upgrade blue">
             <span class="upgrade-header">Value Lv 1</span>
@@ -43,7 +44,13 @@
             <p class="upgrade-details"></p>
           </button>
         </div> <!-- upgrade-column -->
-      </div> <!-- upgrade-row -->
+      </div> <!-- blue-upgrades -->
+      <div id="blue-ascend" class="upgrade-row hidden">
+        <button id="blueAscend" class="upgrade blue">
+          <span class="upgrade-header">Ascend Blue</span>
+          <p class="upgrade-details">Reach MAX on all 3 upgrades to ascend.<br>Resets all blue upgrades but multiply base value by 1000 and obtain 1 ascension point</p>
+        </button>
+      </div> <!-- blue-ascend -->
       <div id="green-upgrades" class="upgrade-row hidden">
         <div class="upgrade-column">
           <button id="greenUpgrade1" class="upgrade green">
@@ -63,13 +70,19 @@
             <p class="upgrade-details"></p>
           </button>
         </div> <!-- upgrade-column -->
-      </div> <!-- upgrade-row -->
+      </div> <!-- green-upgrades -->
       <div id="green-unlock" class="upgrade-row">
         <button id="unlockGreen" class="upgrade green">
           <span class="upgrade-header">Unlock Green Bubbles</span>
           <p class="upgrade-details">Cost: $1,000 | Unlock green bubbles and their upgrades</p>
         </button>
       </div> <!-- green-unlock -->
+      <div id="green-ascend" class="upgrade-row hidden">
+        <button id="greenAscend" class="upgrade green">
+          <span class="upgrade-header">Ascend Green</span>
+          <p class="upgrade-details">Reach MAX on all 3 upgrades to ascend.<br>Resets all green upgrades but multiply base value by 1000 and obtain 1 ascension point</p>
+        </button>
+      </div> <!-- green-ascend -->
       <div id="red-upgrades" class="upgrade-row hidden">
         <div class="upgrade-column">
           <button id="redUpgrade1" class="upgrade red">
@@ -89,28 +102,39 @@
             <p class="upgrade-details"></p>
           </button>
         </div> <!-- upgrade-column -->
-      </div> <!-- upgrade-row -->
+      </div> <!-- red-upgrades -->
       <div id="red-unlock" class="upgrade-row">
         <button id="unlockRed" class="upgrade red">
           <span class="upgrade-header">Unlock Red Bubbles</span>
           <p class="upgrade-details">Cost: $20,000 | Unlock red bubbles and their upgrades</p>
         </button>
       </div> <!-- red-unlock -->
+      <div id="red-ascend" class="upgrade-row hidden">
+        <button id="redAscend" class="upgrade red">
+          <span class="upgrade-header">Ascend Red</span>
+          <p class="upgrade-details">Reach MAX on all 3 upgrades to ascend.<br>Resets all red upgrades but multiply base value by 1000 and obtain 1 ascension point</p>
+        </button>
+      </div> <!-- red-ascend -->
     </div> <!-- bubble-upgrades -->
     <div id="special-upgrades" class="tab-content hidden">
-      <div class="upgrade-row">
+      <div id="spike-upgrades" class="upgrade-row">
         <button id="spikeupgrade" class="upgrade blue">
           <span class="upgrade-header">Add Spikes</span>
           <p class="upgrade-details">Cost: $10,000 | Add spikes to the top of the screen, which will automatically pop bubbles giving you 50% of the bubble's value</p>
         </button>
-      </div> <!-- upgrade-row -->
-      <div class="upgrade-row">
+      </div> <!-- spike-upgrades -->
+      <div id="water-upgrades" class="upgrade-row">
         <button id="waterupgrade" class="upgrade blue">
           <span class="upgrade-header">Better Water</span>
           <p class="upgrade-details">Cost: $100,000 | Upgrade the water to grow the bubble's values at a faster rate</p>
         </button>
-      </div>
+      </div> <!-- water-upgrades -->
     </div> <!-- special-upgrades -->
+    <div id="ascension-upgrades" class="tab-content hidden">
+      <div class="upgrade-row">
+        <p>Reach MAX level on any bubble and ascend to unlock ascension upgrades</p>
+      </div>
+    </div> <!-- ascension-upgrades -->
     <div id="singularity-upgrades" class="tab-content hidden">
       <div class="upgrade-row">
         <p>Reach Infinity Credits to unlock Singularity</p>

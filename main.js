@@ -45,10 +45,12 @@ class GameData {
         this.blueMaxBaseValue = 10;
         this.blueSpawnInterval = 3000;
         this.blueRiseSpeed = 1;
+        this.blueBaseValueMultiplier = 1;
 
         this.blueUpgrade1Level = 1;
         this.blueUpgrade2Level = 1;
         this.blueUpgrade3Level = 1;
+        this.blueAscensionLevel = 0;
 
         this.blueUpgrade1Cost = 50;
         this.blueUpgrade2Cost = 100;
@@ -57,10 +59,12 @@ class GameData {
         this.greenMaxBaseValue = 100;
         this.greenSpawnInterval = 10000;
         this.greenRiseSpeed = 1;
+        this.greenBaseValueMultiplier = 1;
 
         this.greenUpgrade1Level = 1;
         this.greenUpgrade2Level = 1;
         this.greenUpgrade3Level = 1;
+        this.greenAscensionLevel = 0;
 
         this.greenUpgrade1Cost = 1000;
         this.greenUpgrade2Cost = 2000;
@@ -69,10 +73,12 @@ class GameData {
         this.redMaxBaseValue = 1000;
         this.redSpawnInterval = 30000;
         this.redRiseSpeed = 1;
+        this.redBaseValueMultiplier = 1;
 
         this.redUpgrade1Level = 1;
         this.redUpgrade2Level = 1;
         this.redUpgrade3Level = 1;
+        this.redAscensionLevel = 0;
 
         this.redUpgrade1Cost = 20000;
         this.redUpgrade2Cost = 40000;
