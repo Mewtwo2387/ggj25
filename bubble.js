@@ -85,9 +85,9 @@ function spawnBlueBubble() {
   } while (x < uiBounds.x + uiBounds.width && y < uiBounds.y + uiBounds.height);
 
   const random = Math.random();
-  const baseValue = random * gameData.blueMaxBaseValue * gameData.blueBaseValueMultiplier;
+  const baseValue = random * gameData.blueMaxBaseValue * gameData.blueBaseValueMultiplier * gameData.globalBaseValueMultiplier;
   const baseRadius = random * 10 + 10;
-  const speed = (Math.random() * 1 + 1) * gameData.blueRiseSpeed;
+  const speed = (Math.random() * 1 + 1) * gameData.blueRiseSpeed * gameData.globalRiseSpeedMultiplier;
   if (gameData.golden) {
     if (Math.random() < 0.05) {
       gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue * 20, speed, 'golden'));
@@ -111,9 +111,9 @@ function spawnGreenBubble() {
   } while (x < uiBounds.x + uiBounds.width && y < uiBounds.y + uiBounds.height);
 
   const random = Math.random();
-  const baseValue = random * gameData.greenMaxBaseValue * gameData.greenBaseValueMultiplier;
+  const baseValue = random * gameData.greenMaxBaseValue * gameData.greenBaseValueMultiplier * gameData.globalBaseValueMultiplier;
   const baseRadius = random * 5 + 5;
-  const speed = (Math.random() * 1 + 1) * gameData.greenRiseSpeed;
+  const speed = (Math.random() * 1 + 1) * gameData.greenRiseSpeed * gameData.globalRiseSpeedMultiplier;
   if (gameData.golden) {
     if (Math.random() < 0.05) {
       gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue * 20, speed, 'golden'));
@@ -137,9 +137,9 @@ function spawnRedBubble() {
     } while (x < uiBounds.x + uiBounds.width && y < uiBounds.y + uiBounds.height);
 
     const random = Math.random();
-    const baseValue = random * gameData.redMaxBaseValue * gameData.redBaseValueMultiplier;
+    const baseValue = random * gameData.redMaxBaseValue * gameData.redBaseValueMultiplier * gameData.globalBaseValueMultiplier;
     const baseRadius = random * 3 + 3;
-    const speed = (Math.random() * 1 + 1) * gameData.redRiseSpeed;
+    const speed = (Math.random() * 1 + 1) * gameData.redRiseSpeed * gameData.globalRiseSpeedMultiplier;
     if (gameData.golden) {
       if (Math.random() < 0.05) {
         gameData.bubbles.push(new Bubble(x, y, baseRadius, baseValue * 20, speed, 'golden'));

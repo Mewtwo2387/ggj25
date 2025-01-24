@@ -28,8 +28,8 @@ const waterupgradeButton = document.getElementById('waterupgrade');
 const goldenupgradeButton = document.getElementById('goldenupgrade');
 
 blueUpgrade1Button.addEventListener('click', () => {
-  if (gameData.credits >= gameData.blueUpgrade1Cost) {
-      gameData.credits -= gameData.blueUpgrade1Cost;
+  if (gameData.credits >= gameData.blueUpgrade1Cost * gameData.globalCost1Multiplier) {
+      gameData.credits -= gameData.blueUpgrade1Cost * gameData.globalCost1Multiplier;
       gameData.blueMaxBaseValue += 5;
       gameData.blueUpgrade1Level++;
       gameData.blueUpgrade1Cost = Math.floor(gameData.blueUpgrade1Cost * 1.5);
@@ -39,11 +39,11 @@ blueUpgrade1Button.addEventListener('click', () => {
 });
 
 blueUpgrade2Button.addEventListener('click', () => {
-  if (gameData.credits >= gameData.blueUpgrade2Cost) {
-      gameData.credits -= gameData.blueUpgrade2Cost;
+  if (gameData.credits >= gameData.blueUpgrade2Cost * gameData.globalCost1Multiplier) {
+      gameData.credits -= gameData.blueUpgrade2Cost * gameData.globalCost1Multiplier;
       gameData.blueSpawnInterval = Math.floor(gameData.blueSpawnInterval * 0.9);
       clearInterval(blueSpawnIntervalId);
-      blueSpawnIntervalId = setInterval(spawnBlueBubble, gameData.blueSpawnInterval);
+      blueSpawnIntervalId = setInterval(spawnBlueBubble, gameData.blueSpawnInterval * gameData.globalSpawnIntervalMultiplier);
       gameData.blueUpgrade2Level++;
       gameData.blueUpgrade2Cost = Math.floor(gameData.blueUpgrade2Cost * 1.5);
       updateCreditsDisplay();
@@ -52,8 +52,8 @@ blueUpgrade2Button.addEventListener('click', () => {
 });
 
 blueUpgrade3Button.addEventListener('click', () => {
-  if (gameData.credits >= gameData.blueUpgrade3Cost) {
-      gameData.credits -= gameData.blueUpgrade3Cost;
+  if (gameData.credits >= gameData.blueUpgrade3Cost * gameData.globalCost1Multiplier) {
+      gameData.credits -= gameData.blueUpgrade3Cost * gameData.globalCost1Multiplier;
       gameData.blueRiseSpeed *= 0.9;
       gameData.blueUpgrade3Level++;
       gameData.blueUpgrade3Cost = Math.floor(gameData.blueUpgrade3Cost * 1.5);
@@ -63,8 +63,8 @@ blueUpgrade3Button.addEventListener('click', () => {
 });
 
 greenUpgrade1Button.addEventListener('click', () => {
-  if (gameData.credits >= gameData.greenUpgrade1Cost) {
-      gameData.credits -= gameData.greenUpgrade1Cost;
+  if (gameData.credits >= gameData.greenUpgrade1Cost * gameData.globalCost1Multiplier) {
+      gameData.credits -= gameData.greenUpgrade1Cost * gameData.globalCost1Multiplier;
       gameData.greenMaxBaseValue += 50;
       gameData.greenUpgrade1Level++;
       gameData.greenUpgrade1Cost = Math.floor(gameData.greenUpgrade1Cost * 1.5);
@@ -74,11 +74,11 @@ greenUpgrade1Button.addEventListener('click', () => {
 });
 
 greenUpgrade2Button.addEventListener('click', () => {
-  if (gameData.credits >= gameData.greenUpgrade2Cost) {
-      gameData.credits -= gameData.greenUpgrade2Cost;
+  if (gameData.credits >= gameData.greenUpgrade2Cost * gameData.globalCost1Multiplier) {
+      gameData.credits -= gameData.greenUpgrade2Cost * gameData.globalCost1Multiplier;
       gameData.greenSpawnInterval = Math.floor(gameData.greenSpawnInterval * 0.9);
       clearInterval(greenSpawnIntervalId);
-      greenSpawnIntervalId = setInterval(spawnGreenBubble, gameData.greenSpawnInterval);
+      greenSpawnIntervalId = setInterval(spawnGreenBubble, gameData.greenSpawnInterval * gameData.globalSpawnIntervalMultiplier);
       gameData.greenUpgrade2Level++;
       gameData.greenUpgrade2Cost = Math.floor(gameData.greenUpgrade2Cost * 1.5);
       updateCreditsDisplay();
@@ -87,8 +87,8 @@ greenUpgrade2Button.addEventListener('click', () => {
 });
 
 greenUpgrade3Button.addEventListener('click', () => {
-  if (gameData.credits >= gameData.greenUpgrade3Cost) {
-      gameData.credits -= gameData.greenUpgrade3Cost;
+  if (gameData.credits >= gameData.greenUpgrade3Cost * gameData.globalCost1Multiplier) {
+      gameData.credits -= gameData.greenUpgrade3Cost * gameData.globalCost1Multiplier;
       gameData.greenRiseSpeed *= 0.9;
       gameData.greenUpgrade3Level++;
       gameData.greenUpgrade3Cost = Math.floor(gameData.greenUpgrade3Cost * 1.5);
@@ -103,13 +103,13 @@ unlockGreenButton.addEventListener('click', () => {
       gameData.green = true;
       updateCreditsDisplay();
       updateUpgradeButtons();
-      greenSpawnIntervalId = setInterval(spawnGreenBubble, gameData.greenSpawnInterval);
+      greenSpawnIntervalId = setInterval(spawnGreenBubble, gameData.greenSpawnInterval * gameData.globalSpawnIntervalMultiplier);
   }
 });
 
 redUpgrade1Button.addEventListener('click', () => {
-  if (gameData.credits >= gameData.redUpgrade1Cost) {
-      gameData.credits -= gameData.redUpgrade1Cost;
+  if (gameData.credits >= gameData.redUpgrade1Cost * gameData.globalCost1Multiplier) {
+      gameData.credits -= gameData.redUpgrade1Cost * gameData.globalCost1Multiplier;
       gameData.redMaxBaseValue += 500;
       gameData.redUpgrade1Level++;
       gameData.redUpgrade1Cost = Math.floor(gameData.redUpgrade1Cost * 1.5);
@@ -119,11 +119,11 @@ redUpgrade1Button.addEventListener('click', () => {
 });
 
 redUpgrade2Button.addEventListener('click', () => {
-  if (gameData.credits >= gameData.redUpgrade2Cost) {
-      gameData.credits -= gameData.redUpgrade2Cost;
+  if (gameData.credits >= gameData.redUpgrade2Cost * gameData.globalCost1Multiplier) {
+      gameData.credits -= gameData.redUpgrade2Cost * gameData.globalCost1Multiplier;
       gameData.redSpawnInterval = Math.floor(gameData.redSpawnInterval * 0.9);
       clearInterval(redSpawnIntervalId);
-      redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval);
+      redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval * gameData.globalSpawnIntervalMultiplier);
       gameData.redUpgrade2Level++;
       gameData.redUpgrade2Cost = Math.floor(gameData.redUpgrade2Cost * 1.5);
       updateCreditsDisplay();
@@ -132,8 +132,8 @@ redUpgrade2Button.addEventListener('click', () => {
 });
 
 redUpgrade3Button.addEventListener('click', () => {
-  if (gameData.credits >= gameData.redUpgrade3Cost) {
-      gameData.credits -= gameData.redUpgrade3Cost;
+  if (gameData.credits >= gameData.redUpgrade3Cost * gameData.globalCost1Multiplier) {
+      gameData.credits -= gameData.redUpgrade3Cost * gameData.globalCost1Multiplier;
       gameData.redRiseSpeed *= 0.9;
       gameData.redUpgrade3Level++;
       gameData.redUpgrade3Cost = Math.floor(gameData.redUpgrade3Cost * 1.5);
@@ -148,13 +148,14 @@ unlockRedButton.addEventListener('click', () => {
       gameData.red = true;
       updateCreditsDisplay();
       updateUpgradeButtons();
-      redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval);
+      redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval * gameData.globalSpawnIntervalMultiplier);
   }
 });
 
 blueAscendButton.addEventListener('click', () => {
   gameData.blueBaseValueMultiplier *= 1000;
   gameData.blueAscensionLevel++;
+  gameData.ascensionPoints++;
   gameData.blueMaxBaseValue = 10;
   gameData.blueUpgrade1Level = 1;
   gameData.blueUpgrade1Cost = 50 * Math.pow(10000, gameData.blueAscensionLevel);
@@ -165,13 +166,15 @@ blueAscendButton.addEventListener('click', () => {
   gameData.blueUpgrade3Level = 1;
   gameData.blueUpgrade3Cost = 150 * Math.pow(10000, gameData.blueAscensionLevel);
   updateUpgradeButtons();
+  updateAscensionUpgrades();
   clearInterval(blueSpawnIntervalId);
-  blueSpawnIntervalId = setInterval(spawnBlueBubble, gameData.blueSpawnInterval);
+  blueSpawnIntervalId = setInterval(spawnBlueBubble, gameData.blueSpawnInterval * gameData.globalSpawnIntervalMultiplier);
 });
 
 greenAscendButton.addEventListener('click', () => {
   gameData.greenBaseValueMultiplier *= 1000;
   gameData.greenAscensionLevel++;
+  gameData.ascensionPoints++;
   gameData.greenMaxBaseValue = 100;
   gameData.greenUpgrade1Level = 1;
   gameData.greenUpgrade1Cost = 1000 * Math.pow(10000, gameData.greenAscensionLevel);
@@ -182,13 +185,15 @@ greenAscendButton.addEventListener('click', () => {
   gameData.greenUpgrade3Level = 1;
   gameData.greenUpgrade3Cost = 3000 * Math.pow(10000, gameData.greenAscensionLevel);
   updateUpgradeButtons();
+  updateAscensionUpgrades();
   clearInterval(greenSpawnIntervalId);
-  greenSpawnIntervalId = setInterval(spawnGreenBubble, gameData.greenSpawnInterval);
+  greenSpawnIntervalId = setInterval(spawnGreenBubble, gameData.greenSpawnInterval * gameData.globalSpawnIntervalMultiplier);
 });
 
 redAscendButton.addEventListener('click', () => {
   gameData.redBaseValueMultiplier *= 1000;
   gameData.redAscensionLevel++;
+  gameData.ascensionPoints++;
   gameData.redMaxBaseValue = 1000;
   gameData.redUpgrade1Level = 1;
   gameData.redUpgrade1Cost = 20000 * Math.pow(10000, gameData.redAscensionLevel);
@@ -199,8 +204,9 @@ redAscendButton.addEventListener('click', () => {
   gameData.redUpgrade3Level = 1;
   gameData.redUpgrade3Cost = 60000 * Math.pow(10000, gameData.redAscensionLevel);
   updateUpgradeButtons();
+  updateAscensionUpgrades();
   clearInterval(redSpawnIntervalId);
-  redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval);
+  redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval * gameData.globalSpawnIntervalMultiplier);
 });
 
 spikeupgrade.addEventListener('click', () => {
@@ -247,15 +253,77 @@ function updateUpgradeDetails(button, level, cost, value, nextValue, label, asce
 }
 
 function updateUpgradeButtons() {
-  updateUpgradeDetails(blueUpgrade1Button, gameData.blueUpgrade1Level, gameData.blueUpgrade1Cost, gameData.blueMaxBaseValue * gameData.blueBaseValueMultiplier, (gameData.blueMaxBaseValue + 5) * gameData.blueBaseValueMultiplier, 'Value', gameData.blueAscensionLevel);
-  updateUpgradeDetails(blueUpgrade2Button, gameData.blueUpgrade2Level, gameData.blueUpgrade2Cost, gameData.blueSpawnInterval, gameData.blueSpawnInterval * 0.9, 'Interval', gameData.blueAscensionLevel);
-  updateUpgradeDetails(blueUpgrade3Button, gameData.blueUpgrade3Level, gameData.blueUpgrade3Cost, gameData.blueRiseSpeed, gameData.blueRiseSpeed * 0.9, 'Speed', gameData.blueAscensionLevel);
-  updateUpgradeDetails(greenUpgrade1Button, gameData.greenUpgrade1Level, gameData.greenUpgrade1Cost, gameData.greenMaxBaseValue * gameData.greenBaseValueMultiplier, (gameData.greenMaxBaseValue + 50) * gameData.greenBaseValueMultiplier, 'Value', gameData.greenAscensionLevel);
-  updateUpgradeDetails(greenUpgrade2Button, gameData.greenUpgrade2Level, gameData.greenUpgrade2Cost, gameData.greenSpawnInterval, gameData.greenSpawnInterval * 0.9, 'Interval', gameData.greenAscensionLevel);
-  updateUpgradeDetails(greenUpgrade3Button, gameData.greenUpgrade3Level, gameData.greenUpgrade3Cost, gameData.greenRiseSpeed, gameData.greenRiseSpeed * 0.9, 'Speed', gameData.greenAscensionLevel);
-  updateUpgradeDetails(redUpgrade1Button, gameData.redUpgrade1Level, gameData.redUpgrade1Cost, gameData.redMaxBaseValue * gameData.redBaseValueMultiplier, (gameData.redMaxBaseValue + 500) * gameData.redBaseValueMultiplier, 'Value', gameData.redAscensionLevel);
-  updateUpgradeDetails(redUpgrade2Button, gameData.redUpgrade2Level, gameData.redUpgrade2Cost, gameData.redSpawnInterval, gameData.redSpawnInterval * 0.9, 'Interval', gameData.redAscensionLevel);
-  updateUpgradeDetails(redUpgrade3Button, gameData.redUpgrade3Level, gameData.redUpgrade3Cost, gameData.redRiseSpeed, gameData.redRiseSpeed * 0.9, 'Speed', gameData.redAscensionLevel);
+  updateUpgradeDetails(
+    blueUpgrade1Button, 
+    gameData.blueUpgrade1Level, 
+    gameData.blueUpgrade1Cost * gameData.globalCost1Multiplier,
+    gameData.blueMaxBaseValue * gameData.blueBaseValueMultiplier * gameData.globalBaseValueMultiplier, 
+    (gameData.blueMaxBaseValue + 5) * gameData.blueBaseValueMultiplier * gameData.globalBaseValueMultiplier, 
+    'Value', 
+    gameData.blueAscensionLevel);
+  updateUpgradeDetails(blueUpgrade2Button,
+     gameData.blueUpgrade2Level,
+     gameData.blueUpgrade2Cost * gameData.globalCost1Multiplier,
+     gameData.blueSpawnInterval * gameData.globalSpawnIntervalMultiplier,
+     gameData.blueSpawnInterval * 0.9 * gameData.globalSpawnIntervalMultiplier,
+     'Interval',
+     gameData.blueAscensionLevel);
+  updateUpgradeDetails(blueUpgrade3Button,
+    gameData.blueUpgrade3Level,
+    gameData.blueUpgrade3Cost * gameData.globalCost1Multiplier,
+    gameData.blueRiseSpeed * gameData.globalRiseSpeedMultiplier,
+    gameData.blueRiseSpeed * 0.9 * gameData.globalRiseSpeedMultiplier,
+    'Speed',
+    gameData.blueAscensionLevel);
+
+  updateUpgradeDetails(greenUpgrade1Button,
+    gameData.greenUpgrade1Level,
+    gameData.greenUpgrade1Cost * gameData.globalCost1Multiplier,
+    gameData.greenMaxBaseValue * gameData.greenBaseValueMultiplier * gameData.globalBaseValueMultiplier,
+    (gameData.greenMaxBaseValue + 50) * gameData.greenBaseValueMultiplier * gameData.globalBaseValueMultiplier,
+    'Value',
+    gameData.greenAscensionLevel);
+
+  updateUpgradeDetails(greenUpgrade2Button,
+    gameData.greenUpgrade2Level,
+    gameData.greenUpgrade2Cost * gameData.globalCost1Multiplier,
+    gameData.greenSpawnInterval * gameData.globalSpawnIntervalMultiplier,
+    gameData.greenSpawnInterval * 0.9 * gameData.globalSpawnIntervalMultiplier,
+    'Interval',
+    gameData.greenAscensionLevel);
+
+  updateUpgradeDetails(greenUpgrade3Button,
+    gameData.greenUpgrade3Level,
+    gameData.greenUpgrade3Cost * gameData.globalCost1Multiplier,
+    gameData.greenRiseSpeed * gameData.globalRiseSpeedMultiplier,
+    gameData.greenRiseSpeed * 0.9 * gameData.globalRiseSpeedMultiplier,
+    'Speed',
+    gameData.greenAscensionLevel);
+
+  updateUpgradeDetails(redUpgrade1Button,
+    gameData.redUpgrade1Level,
+    gameData.redUpgrade1Cost * gameData.globalCost1Multiplier,
+    gameData.redMaxBaseValue * gameData.redBaseValueMultiplier * gameData.globalBaseValueMultiplier,
+    (gameData.redMaxBaseValue + 500) * gameData.redBaseValueMultiplier * gameData.globalBaseValueMultiplier,
+    'Value',
+    gameData.redAscensionLevel);
+
+  updateUpgradeDetails(redUpgrade2Button,
+    gameData.redUpgrade2Level,
+    gameData.redUpgrade2Cost * gameData.globalCost1Multiplier,
+    gameData.redSpawnInterval * gameData.globalSpawnIntervalMultiplier,
+    gameData.redSpawnInterval * 0.9 * gameData.globalSpawnIntervalMultiplier,
+    'Interval',
+    gameData.redAscensionLevel);
+
+  updateUpgradeDetails(redUpgrade3Button,
+    gameData.redUpgrade3Level,
+    gameData.redUpgrade3Cost * gameData.globalCost1Multiplier,
+    gameData.redRiseSpeed * gameData.globalRiseSpeedMultiplier,
+    gameData.redRiseSpeed * 0.9 * gameData.globalRiseSpeedMultiplier,
+    'Speed',
+    gameData.redAscensionLevel);
+  
   if (gameData.green) {
       greenRow.classList.remove('hidden');
       unlockGreenRow.classList.add('hidden');

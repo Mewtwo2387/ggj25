@@ -89,6 +89,24 @@ class GameData {
         this.spike = false;
         this.water = false;
         this.golden = false;
+
+        this.ascensionPoints = 0;
+
+        this.ascensionIntervalUpgradeLevel = 0;
+        this.ascensionSpeedUpgradeLevel = 0;
+        this.ascensionCostUpgrade1Level = 0;
+        this.ascensionCostUpgrade2Level = 0;
+
+        this.ascensionIntervalUpgradeCost = 1;
+        this.ascensionSpeedUpgradeCost = 1;
+        this.ascensionCostUpgrade1Cost = 1;
+        this.ascensionCostUpgrade2Cost = 1;
+
+        this.globalBaseValueMultiplier = 1;
+        this.globalSpawnIntervalMultiplier = 1;
+        this.globalRiseSpeedMultiplier = 1;
+        this.globalCost1Multiplier = 1;
+        this.globalCost2Multiplier = 1;
     }
 }
 
@@ -251,5 +269,6 @@ tabButtons.forEach(button => {
 loadGameState();
 gameLoop();
 updateUpgradeButtons();
+updateAscensionUpgrades();
 document.querySelector('.tab-button[data-tab="bubble-upgrades"]').click();
 setInterval(saveGameState, 10000);

@@ -8,6 +8,7 @@
   <script src="math.js" defer></script>
   <script src="bubble.js" defer></script>
   <script src="upgrades.js" defer></script>
+  <script src="ascensionupgrades.js" defer></script>
   <script src="main.js" defer></script>
 </head>
 <body>
@@ -138,8 +139,35 @@
       </div> <!-- golden-upgrades -->
     </div> <!-- special-upgrades -->
     <div id="ascension-upgrades" class="tab-content hidden">
-      <div class="upgrade-row">
+      <div id="ascend-locked"class="upgrade-row">
         <p>Reach MAX level on any bubble and ascend to unlock ascension upgrades</p>
+      </div>
+      <div id="ascension-label-row" class="upgrade-row hidden">
+        <p id="ascension-points-label">Ascension Points: 0</p>
+      </div>
+      <div id="interval-upgrades" class="upgrade-row hidden">
+        <button id="intervalupgrade" class="upgrade blue">
+          <span class="upgrade-header">Interval Upgrade Lv 0</span>
+          <p class="upgrade-details">Cost: 1 Ascension Point<br>Decreases interval of all bubbles by 20%</p>
+        </button>
+      </div>
+      <div id="speed-upgrades" class="upgrade-row hidden">
+        <button id="speedupgrade" class="upgrade blue">
+          <span class="upgrade-header">Speed Upgrade Lv 0</span>
+          <p class="upgrade-details">Cost: 1 Ascension Point<br>Decreases speed of all bubbles by 20%</p>
+        </button>
+      </div>
+      <div id="cost-upgrades" class="upgrade-row hidden">
+        <button id="costupgrade" class="upgrade blue">
+          <span class="upgrade-header">Cost Upgrade Lv 0</span>
+          <p class="upgrade-details">Cost: 1 Ascension Point<br>All regular upgrades are 30% cheaper</p>
+        </button>
+      </div>
+      <div id="ascension-cost-upgrades" class="upgrade-row hidden">
+        <button id="ascensioncostupgrade" class="upgrade blue">
+          <span class="upgrade-header">Ascension Cost Upgrade Lv 0</span>
+          <p class="upgrade-details">Cost: 1 Ascension Point<br>All ascension upgrades are 30% cheaper</p>
+        </button>
       </div>
     </div> <!-- ascension-upgrades -->
     <div id="singularity-upgrades" class="tab-content hidden">
