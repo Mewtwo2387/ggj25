@@ -222,7 +222,7 @@ waterupgradeButton.addEventListener('click', () => {
 
 function updateUpgradeDetails(button, level, cost, value, nextValue, label, ascensionLevel) {
   if (level < 20) {
-    button.querySelector('.upgrade-details').innerHTML = `Cost: $${formatNumber(cost)}<br>${label}: ${formatNumber(value)}<br>Next: ${formatNumber(nextValue)}`;
+    button.querySelector('.upgrade-details').innerHTML = `Cost: $${format(cost)}<br>${label}: ${format(value)}<br>Next: ${format(nextValue)}`;
     if (label == 'Value' && ascensionLevel > 0) {
       button.querySelector('.upgrade-header').innerHTML = `${label}(+${ascensionLevel}) Lv ${level}`;
     } else {
@@ -230,7 +230,7 @@ function updateUpgradeDetails(button, level, cost, value, nextValue, label, asce
     }
     button.disabled = false;
   } else {
-    button.querySelector('.upgrade-details').innerHTML = `${label}: ${formatNumber(value)}`;
+    button.querySelector('.upgrade-details').innerHTML = `${label}: ${format(value)}`;
     button.querySelector('.upgrade-header').innerHTML = `${label} MAX`;
     button.disabled = true;
   }
@@ -243,7 +243,7 @@ function updateUpgradeButtons() {
   updateUpgradeDetails(greenUpgrade1Button, gameData.greenUpgrade1Level, gameData.greenUpgrade1Cost, gameData.greenMaxBaseValue * gameData.greenBaseValueMultiplier, (gameData.greenMaxBaseValue + 50) * gameData.greenBaseValueMultiplier, 'Value', gameData.greenAscensionLevel);
   updateUpgradeDetails(greenUpgrade2Button, gameData.greenUpgrade2Level, gameData.greenUpgrade2Cost, gameData.greenSpawnInterval, gameData.greenSpawnInterval * 0.9, 'Interval', gameData.greenAscensionLevel);
   updateUpgradeDetails(greenUpgrade3Button, gameData.greenUpgrade3Level, gameData.greenUpgrade3Cost, gameData.greenRiseSpeed, gameData.greenRiseSpeed * 0.9, 'Speed', gameData.greenAscensionLevel);
-  updateUpgradeDetails(redUpgrade1Button, gameData.redUpgrade1Level, gameData.redUpgrade1Cost, gameData.redMaxBaseValue * gameData.redBaseValueMultiplier, (gameData.redMaxBaseValue + 500) * gameData.redBaseValueMultiplier, 'Value');
+  updateUpgradeDetails(redUpgrade1Button, gameData.redUpgrade1Level, gameData.redUpgrade1Cost, gameData.redMaxBaseValue * gameData.redBaseValueMultiplier, (gameData.redMaxBaseValue + 500) * gameData.redBaseValueMultiplier, 'Value', gameData.redAscensionLevel);
   updateUpgradeDetails(redUpgrade2Button, gameData.redUpgrade2Level, gameData.redUpgrade2Cost, gameData.redSpawnInterval, gameData.redSpawnInterval * 0.9, 'Interval', gameData.redAscensionLevel);
   updateUpgradeDetails(redUpgrade3Button, gameData.redUpgrade3Level, gameData.redUpgrade3Cost, gameData.redRiseSpeed, gameData.redRiseSpeed * 0.9, 'Speed', gameData.redAscensionLevel);
   if (gameData.green) {

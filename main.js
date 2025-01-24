@@ -157,7 +157,7 @@ function gameLoop() {
 
         if (bubble.y - bubble.radius < 0) {
             if (gameData.spike) {
-                gameData.credits += Math.floor(bubble.currentValue * 0.5);
+                gameData.credits += bubble.currentValue * 0.5;
                 updateCreditsDisplay();
                 bubble.pop();
             }
@@ -183,7 +183,7 @@ canvas.addEventListener('click', (e) => {
         );
 
         if (dist < bubble.radius) {
-            gameData.credits += Math.floor(bubble.currentValue);
+            gameData.credits += bubble.currentValue;
             updateCreditsDisplay();
             bubble.pop();
         }
@@ -197,11 +197,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 function updateCreditsDisplay() {
-    creditsElement.textContent = `$${formatNumber(gameData.credits)}`;
-}
-
-function formatNumber(num) {
-    return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 3 });
+    creditsElement.textContent = `$${format(gameData.credits)}`;
 }
 
 settingsButton.addEventListener('click', () => {

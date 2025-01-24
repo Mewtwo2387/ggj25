@@ -46,7 +46,7 @@ class Bubble {
       ctx.fillStyle = '#000';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(`$${Math.floor(this.currentValue)}`, this.x, this.y);
+      ctx.fillText(`$${format(this.currentValue)}`, this.x, this.y);
   }
 
   update() {
