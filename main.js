@@ -17,6 +17,8 @@ const aboutModal = document.getElementById('aboutModal');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+let turbulence = 0;
+
 const uiBounds = {
     x: 0,
     y: 0,
@@ -110,6 +112,38 @@ class GameData {
     }
 }
 
+class WindParticle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.length = Math.random() * 20 + 10;
+        this.speed = Math.random() * 0.5 + 0.5;
+    }
+
+    update() {
+        this.x += this.speed * turbulence / 3;
+        if (this.x > canvas.width) {
+            this.x = 0;
+            this.y = Math.random() * canvas.height;
+        }
+        if (this.x < 0) {
+            this.x = canvas.width;
+            this.y = Math.random() * canvas.height;
+        }
+    }
+
+    draw() {
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x - this.length, this.y);
+        ctx.stroke();
+    }
+}
+
+const windParticles = Array.from({ length: 100 }, () => new WindParticle());
+
 function saveGameState() {
     localStorage.setItem('gameState', JSON.stringify(gameData));
     console.log('Game saved!');
@@ -161,14 +195,21 @@ function drawSpikes() {
 }
 
 function gameLoop() {
+    turbulence += Math.random() * 0.1 - 0.05;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    windParticles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
 
     if (gameData.spike) {
         drawSpikes();
     }
 
     gameData.bubbles.forEach((bubble, index) => {
-        if(bubble.update()){
+        if(bubble.update(turbulence)){
             gameData.bubbles.splice(index, 1);
             return;
         }

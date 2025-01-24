@@ -53,7 +53,7 @@ class Bubble {
       ctx.fillText(`$${format(this.currentValue)}`, this.x, this.y);
   }
 
-  update() {
+  update(turbulence) {
       if (this.popping) {
           this.radius -= this.baseRadius * 0.1;
           if (this.radius <= 0) {
@@ -61,6 +61,7 @@ class Bubble {
           }
       } else {
           this.y -= this.speed;
+          this.x += turbulence / Math.sqrt(this.radius);
           if (this.water) {
             this.radius += this.baseRadius * (0.02 * this.baseSpeed);
             this.currentValue += this.baseValue * 0.02;
