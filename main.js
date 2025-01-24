@@ -17,7 +17,7 @@ const aboutModal = document.getElementById('aboutModal');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let turbulence = 0;
+let wind = 0;
 
 const uiBounds = {
     x: 0,
@@ -121,7 +121,7 @@ class WindParticle {
     }
 
     update() {
-        this.x += this.speed * turbulence / 3;
+        this.x += this.speed * wind / 3;
         if (this.x > canvas.width) {
             this.x = 0;
             this.y = Math.random() * canvas.height;
@@ -195,7 +195,7 @@ function drawSpikes() {
 }
 
 function gameLoop() {
-    turbulence += Math.random() * 0.1 - 0.05;
+    document.getElementById('windLabel').textContent = `Wind: ${format(wind)}`;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -209,7 +209,7 @@ function gameLoop() {
     }
 
     gameData.bubbles.forEach((bubble, index) => {
-        if(bubble.update(turbulence)){
+        if(bubble.update(wind)){
             gameData.bubbles.splice(index, 1);
             return;
         }
@@ -230,6 +230,13 @@ function gameLoop() {
     });
 
     requestAnimationFrame(gameLoop);
+}
+
+function updateWind() {
+    wind += Math.random() * 0.5 - 0.25;
+    if (wind > 3 || wind < -3) {
+        wind *= 0.9;
+    }
 }
 
 canvas.addEventListener('click', (e) => {
@@ -313,3 +320,4 @@ updateUpgradeButtons();
 updateAscensionUpgrades();
 document.querySelector('.tab-button[data-tab="bubble-upgrades"]').click();
 setInterval(saveGameState, 10000);
+setInterval(updateWind, 500);
