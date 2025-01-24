@@ -121,8 +121,20 @@ body.water {
   background: linear-gradient(135deg, #ff3333, #ff9999);
 }
 
+.upgrade.blue:disabled {
+  background: #99c;
+}
+
+.upgrade.green:disabled {
+  background: #9c9;
+}
+
+.upgrade.red:disabled {
+  background: #c99;
+}
+
+
 .upgrade:disabled {
-  background: #aaa;
   cursor: not-allowed;
   box-shadow: none;
 }
