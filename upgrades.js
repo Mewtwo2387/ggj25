@@ -228,8 +228,22 @@ spikeupgradeButton.addEventListener('click', () => {
 
 function updateWaterBackground() {
     const waterLevel = gameData.waterLevel || 1.0;
-    const blueIntensity = Math.floor(135 + (120 * (waterLevel - 1.0))); // Adjust blue intensity based on water level
-    document.body.style.background = `linear-gradient(to top, #2575fc, rgb(0, 0, ${blueIntensity}))`;
+    const startColorBottom = { r: 135, g: 206, b: 235 }; // #87CEEB
+    const startColorTop = { r: 240, g: 248, b: 255 }; // #f0f8ff
+    const endColorBottom = { r: 37, g: 117, b: 252 }; // #2575fc
+    const endColorTop = { r: 135, g: 206, b: 235 }; // #87CEEB
+
+    const interpolate = (start, end, factor) => Math.floor(start + (end - start) * factor);
+
+    const factor = (waterLevel - 1.0) / (2.0 - 1.0); // Normalize water level to a 0-1 range
+    const rBottom = interpolate(startColorBottom.r, endColorBottom.r, factor);
+    const gBottom = interpolate(startColorBottom.g, endColorBottom.g, factor);
+    const bBottom = interpolate(startColorBottom.b, endColorBottom.b, factor);
+    const rTop = interpolate(startColorTop.r, endColorTop.r, factor);
+    const gTop = interpolate(startColorTop.g, endColorTop.g, factor);
+    const bTop = interpolate(startColorTop.b, endColorTop.b, factor);
+
+    document.body.style.background = `linear-gradient(to top, rgb(${rBottom}, ${gBottom}, ${bBottom}), rgb(${rTop}, ${gTop}, ${bTop}))`;
 }
 
 waterupgradeButton.addEventListener('click', () => {
