@@ -88,7 +88,9 @@ class GameData {
 
         this.green = false;
         this.red = false;
-        this.spike = false;
+        this.spikeUp = false;
+        this.spikeLeft = false;
+        this.spikeRight = false;
         this.water = false;
         this.golden = false;
 
@@ -211,17 +213,50 @@ const gameData = new GameData();
 function drawSpikes() {
     const spikeWidth = 20;
     const spikeHeight = 10;
-    const spikeCount = Math.ceil(canvas.width / spikeWidth);
 
-    ctx.fillStyle = '#a33';
-    for (let i = 0; i < spikeCount; i++) {
-        const x = i * spikeWidth;
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x + spikeWidth / 2, spikeHeight);
-        ctx.lineTo(x + spikeWidth, 0);
-        ctx.closePath();
-        ctx.fill();
+    // Draw top spikes
+    if (gameData.spikeUp) {
+        const spikeCount = Math.ceil(canvas.width / spikeWidth);
+        ctx.fillStyle = '#a33';
+        for (let i = 0; i < spikeCount; i++) {
+            const x = i * spikeWidth;
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x + spikeWidth / 2, spikeHeight);
+            ctx.lineTo(x + spikeWidth, 0);
+            ctx.closePath();
+            ctx.fill();
+        }
+    }
+
+    // Draw left spikes
+    if (gameData.spikeLeft) {
+        const spikeCount = Math.ceil(canvas.height / spikeWidth);
+        ctx.fillStyle = '#a33';
+        for (let i = 0; i < spikeCount; i++) {
+            const y = i * spikeWidth;
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(spikeHeight, y + spikeWidth / 2);
+            ctx.lineTo(0, y + spikeWidth);
+            ctx.closePath();
+            ctx.fill();
+        }
+    }
+
+    // Draw right spikes
+    if (gameData.spikeRight) {
+        const spikeCount = Math.ceil(canvas.height / spikeWidth);
+        ctx.fillStyle = '#a33';
+        for (let i = 0; i < spikeCount; i++) {
+            const y = i * spikeWidth;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width, y);
+            ctx.lineTo(canvas.width - spikeHeight, y + spikeWidth / 2);
+            ctx.lineTo(canvas.width, y + spikeWidth);
+            ctx.closePath();
+            ctx.fill();
+        }
     }
 }
 
@@ -278,18 +313,28 @@ function gameLoop() {
     }
 
     gameData.bubbles.forEach((bubble, index) => {
-        if(bubble.update(wind)){
+        if (bubble.update(wind)) {
             gameData.bubbles.splice(index, 1);
             return;
         }
         bubble.draw();
 
-        if (bubble.y - bubble.radius < 0) {
-            if (gameData.spike) {
-                gameData.credits += bubble.currentValue * 0.5;
-                updateCreditsDisplay();
-                bubble.pop();
-            }
+        if (gameData.spikeUp && bubble.y - bubble.radius < 0) {
+            gameData.credits += bubble.currentValue * 0.5;
+            updateCreditsDisplay();
+            bubble.pop();
+            return;
+        }
+        if (gameData.spikeLeft && bubble.x - bubble.radius < 0) {
+            gameData.credits += bubble.currentValue * 0.5;
+            updateCreditsDisplay();
+            bubble.pop();
+            return;
+        }
+        if (gameData.spikeRight && bubble.x + bubble.radius > canvas.width) {
+            gameData.credits += bubble.currentValue * 0.5;
+            updateCreditsDisplay();
+            bubble.pop();
             return;
         }
 
@@ -301,11 +346,10 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
+
+// TODO
 function updateWind() {
-    wind += Math.random() * 0.5 - 0.25;
-    if (wind > 3 || wind < -3) {
-        wind *= 0.9;
-    }
+    wind
 }
 
 canvas.addEventListener('click', (e) => {
