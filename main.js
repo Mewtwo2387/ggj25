@@ -212,8 +212,7 @@ function loadGameState() {
         if (gameData.red) {
             redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval);
         }
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 }
 
@@ -337,21 +336,21 @@ function gameLoop() {
 
         if (gameData.spikeUp && bubble.y - bubble.radius < 0) {
             gameData.credits += bubble.currentValue * 0.5;
-            updateCreditsDisplay();
+            updateCredits();
             bubble.pop();
             showPopup(`$${format(bubble.currentValue * 0.5)}`, bubble.x, bubble.y);
             return;
         }
         if (gameData.spikeLeft && bubble.x - bubble.radius < 0) {
             gameData.credits += bubble.currentValue * 0.5;
-            updateCreditsDisplay();
+            updateCredits();
             bubble.pop();
             showPopup(`$${format(bubble.currentValue * 0.5)}`, bubble.x, bubble.y);
             return;
         }
         if (gameData.spikeRight && bubble.x + bubble.radius > canvas.width) {
             gameData.credits += bubble.currentValue * 0.5;
-            updateCreditsDisplay();
+            updateCredits();
             bubble.pop();
             showPopup(`$${format(bubble.currentValue * 0.5)}`, bubble.x, bubble.y);
             return;
@@ -383,7 +382,7 @@ canvas.addEventListener('click', (e) => {
 
         if (dist < bubble.radius) {
             gameData.credits += bubble.currentValue;
-            updateCreditsDisplay();
+            updateCredits();
             bubble.pop();
             showPopup(`$${format(bubble.currentValue)}`, mouseX, mouseY);
         }
@@ -396,8 +395,9 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-function updateCreditsDisplay() {
+function updateCredits() {
     creditsElement.textContent = `$${format(gameData.credits)}`;
+    updateUpgradeButtons();
 }
 
 settingsButton.addEventListener('click', () => {
