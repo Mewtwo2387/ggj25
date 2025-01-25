@@ -326,10 +326,7 @@ function gameLoop() {
     });
 
     drawLightRays();
-
-    if (gameData.spike) {
-        drawSpikes();
-    }
+    drawSpikes();
 
     gameData.bubbles.forEach((bubble, index) => {
         if (bubble.update(wind)) {
