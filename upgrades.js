@@ -36,8 +36,7 @@ blueUpgrade1Button.addEventListener('click', () => {
         gameData.blueMaxBaseValue += 5;
         gameData.blueUpgrade1Level++;
         gameData.blueUpgrade1Cost = Math.floor(gameData.blueUpgrade1Cost * 1.5);
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -49,8 +48,7 @@ blueUpgrade2Button.addEventListener('click', () => {
         blueSpawnIntervalId = setInterval(spawnBlueBubble, gameData.blueSpawnInterval * gameData.globalSpawnIntervalMultiplier);
         gameData.blueUpgrade2Level++;
         gameData.blueUpgrade2Cost = Math.floor(gameData.blueUpgrade2Cost * 1.5);
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -60,8 +58,7 @@ blueUpgrade3Button.addEventListener('click', () => {
         gameData.blueRiseSpeed *= 0.9;
         gameData.blueUpgrade3Level++;
         gameData.blueUpgrade3Cost = Math.floor(gameData.blueUpgrade3Cost * 1.5);
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -71,8 +68,7 @@ greenUpgrade1Button.addEventListener('click', () => {
         gameData.greenMaxBaseValue += 50;
         gameData.greenUpgrade1Level++;
         gameData.greenUpgrade1Cost = Math.floor(gameData.greenUpgrade1Cost * 1.5);
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -84,8 +80,7 @@ greenUpgrade2Button.addEventListener('click', () => {
         greenSpawnIntervalId = setInterval(spawnGreenBubble, gameData.greenSpawnInterval * gameData.globalSpawnIntervalMultiplier);
         gameData.greenUpgrade2Level++;
         gameData.greenUpgrade2Cost = Math.floor(gameData.greenUpgrade2Cost * 1.5);
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -95,8 +90,7 @@ greenUpgrade3Button.addEventListener('click', () => {
         gameData.greenRiseSpeed *= 0.9;
         gameData.greenUpgrade3Level++;
         gameData.greenUpgrade3Cost = Math.floor(gameData.greenUpgrade3Cost * 1.5);
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -104,8 +98,7 @@ unlockGreenButton.addEventListener('click', () => {
     if (gameData.credits >= 1000) {
         gameData.credits -= 1000;
         gameData.green = true;
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
         greenSpawnIntervalId = setInterval(spawnGreenBubble, gameData.greenSpawnInterval * gameData.globalSpawnIntervalMultiplier);
     }
 });
@@ -116,8 +109,7 @@ redUpgrade1Button.addEventListener('click', () => {
         gameData.redMaxBaseValue += 500;
         gameData.redUpgrade1Level++;
         gameData.redUpgrade1Cost = Math.floor(gameData.redUpgrade1Cost * 1.5);
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -129,8 +121,7 @@ redUpgrade2Button.addEventListener('click', () => {
         redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval * gameData.globalSpawnIntervalMultiplier);
         gameData.redUpgrade2Level++;
         gameData.redUpgrade2Cost = Math.floor(gameData.redUpgrade2Cost * 1.5);
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -140,8 +131,7 @@ redUpgrade3Button.addEventListener('click', () => {
         gameData.redRiseSpeed *= 0.9;
         gameData.redUpgrade3Level++;
         gameData.redUpgrade3Cost = Math.floor(gameData.redUpgrade3Cost * 1.5);
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -149,8 +139,7 @@ unlockRedButton.addEventListener('click', () => {
     if (gameData.credits >= 20000) {
         gameData.credits -= 20000;
         gameData.red = true;
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
         redSpawnIntervalId = setInterval(spawnRedBubble, gameData.redSpawnInterval * gameData.globalSpawnIntervalMultiplier);
     }
 });
@@ -218,24 +207,21 @@ spikeupgradeButton.addEventListener('click', () => {
         if (gameData.credits >= 10000) {
             gameData.credits -= 10000;
             gameData.spikeUp = true;
-            updateCreditsDisplay();
-            updateUpgradeButtons();
+            updateCredits();
         }
     } else if (!gameData.spikeLeft) {
         // Second upgrade: Left spikes
         if (gameData.credits >= 50000) {
             gameData.credits -= 50000;
             gameData.spikeLeft = true;
-            updateCreditsDisplay();
-            updateUpgradeButtons();
+            updateCredits();
         }
     } else if (!gameData.spikeRight) {
         // Third upgrade: Right spikes
         if (gameData.credits >= 100000) {
             gameData.credits -= 100000;
             gameData.spikeRight = true;
-            updateCreditsDisplay();
-            updateUpgradeButtons();
+            updateCredits();
         }
     }
 });
@@ -251,8 +237,7 @@ waterupgradeButton.addEventListener('click', () => {
     if (currentLevelIndex < waterLevels.length - 1 && gameData.credits >= 100000) {
         gameData.credits -= 100000;
         gameData.waterLevel = waterLevels[currentLevelIndex + 1];
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
         updateWaterBackground();
     }
 });
@@ -261,8 +246,7 @@ goldenupgradeButton.addEventListener('click', () => {
     if (gameData.credits >= 1000000 && !gameData.golden) {
         gameData.credits -= 1000000;
         gameData.golden = true;
-        updateCreditsDisplay();
-        updateUpgradeButtons();
+        updateCredits();
     }
 });
 
@@ -274,7 +258,7 @@ function updateUpgradeDetails(button, level, cost, value, nextValue, label, asce
         } else {
             button.querySelector('.upgrade-header').innerHTML = `${label} Lv ${level}`;
         }
-        button.disabled = false;
+        button.disabled = gameData.credits < cost;
     } else {
         button.querySelector('.upgrade-details').innerHTML = `${label}: ${format(value)}`;
         button.querySelector('.upgrade-header').innerHTML = `${label} MAX`;
@@ -360,6 +344,7 @@ function updateUpgradeButtons() {
     } else {
         greenRow.classList.add('hidden');
         unlockGreenRow.classList.remove('hidden');
+        unlockGreenButton.disabled = gameData.credits < 1000;
     }
     if (gameData.red) {
         redRow.classList.remove('hidden');
@@ -367,6 +352,7 @@ function updateUpgradeButtons() {
     } else {
         redRow.classList.add('hidden');
         unlockRedRow.classList.remove('hidden');
+        unlockRedButton.disabled = gameData.credits < 20000;
     }
     if (gameData.spikeUp && gameData.spikeLeft && gameData.spikeRight) {
         spikeupgradeButton.disabled = true;
