@@ -333,6 +333,7 @@ function updateUpgradeButtons() {
     } else {
         greenRow.classList.add('hidden');
         unlockGreenRow.classList.remove('hidden');
+        unlockGreenButton.disabled = gameData.credits < 1000;
     }
     if (gameData.red) {
         redRow.classList.remove('hidden');
@@ -340,6 +341,7 @@ function updateUpgradeButtons() {
     } else {
         redRow.classList.add('hidden');
         unlockRedRow.classList.remove('hidden');
+        unlockRedButton.disabled = gameData.credits < 20000;
     }
     if (gameData.spikeUp && gameData.spikeLeft && gameData.spikeRight) {
         spikeupgradeButton.disabled = true;
