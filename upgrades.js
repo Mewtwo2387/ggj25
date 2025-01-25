@@ -248,8 +248,8 @@ function updateWaterBackground() {
 
 waterupgradeButton.addEventListener('click', () => {
     const currentLevelIndex = waterLevels.indexOf(gameData.waterLevel || 1.0);
-    if (currentLevelIndex < waterLevels.length - 1 && gameData.credits >= 100000) {
-        gameData.credits -= 100000;
+    if (currentLevelIndex < waterLevels.length - 1 && gameData.credits >= 100000 * Math.pow(10, currentLevelIndex)) {
+        gameData.credits -= 100000 * Math.pow(10, currentLevelIndex);
         gameData.waterLevel = waterLevels[currentLevelIndex + 1];
         updateCredits();
         updateWaterBackground();
@@ -392,7 +392,7 @@ function updateUpgradeButtons() {
         waterupgradeButton.querySelector('.upgrade-header').innerHTML = 'Water MAX';
     } else {
         waterupgradeButton.disabled = false;
-        waterupgradeButton.querySelector('.upgrade-details').innerHTML = `Cost: $100,000<br>Water Level: ${gameData.waterLevel || 1.0}<br>Next: ${waterLevels[waterLevels.indexOf(gameData.waterLevel || 1.0) + 1]}`;
+        waterupgradeButton.querySelector('.upgrade-details').innerHTML = `Cost: $${format(100000 * Math.pow(10, waterLevels.indexOf(gameData.waterLevel || 1.0)))}<br>Water Level: ${gameData.waterLevel || 1.0}<br>Next: ${waterLevels[waterLevels.indexOf(gameData.waterLevel || 1.0) + 1]}`;
         waterupgradeButton.querySelector('.upgrade-header').innerHTML = 'Better Water';
     }
     if (gameData.golden) {
