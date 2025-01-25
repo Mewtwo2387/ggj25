@@ -174,8 +174,8 @@ class bubbleParticle {
     }
 }
 
-const windParticles = Array.from({ length: 100 }, () => new WindParticle());
-const bubbleParticles = Array.from({ length: 50 }, () => new bubbleParticle());
+const windParticles = Array.from({length: 100}, () => new WindParticle());
+const bubbleParticles = Array.from({length: 50}, () => new bubbleParticle());
 
 function saveGameState() {
     localStorage.setItem('gameState', JSON.stringify(gameData));
@@ -346,11 +346,53 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
+let side = -1;               // -1 => negative side, +1 => positive side
+let phase = 0;               // Phase for the sine wave
+let isTransitioning = false; // Are we currently in a quick transition?
+let transitionStart = 0;
+let transitionEnd = 0;
+let transitionProgress = 0;
 
-// TODO
+// Tweak these parameters to control the feel of the oscillation
+const amplitude = 1
+const phaseSpeed = 0.06;     // Speed at which the sine wave progresses
+const transitionSpeed = 0.05
+const sideMidNeg = -3
+const sideMidPos = 3
+
 function updateWind() {
-    wind
+    if (isTransitioning) {
+        // We are in the middle of a quick transition to the other side
+        transitionProgress += transitionSpeed;
+        if (transitionProgress >= 1) {
+            // Finished transition
+            transitionProgress = 1;
+            isTransitioning = false;
+        }
+        // Linear interpolation from transitionStart -> transitionEnd
+        wind = transitionStart + (transitionEnd - transitionStart) * transitionProgress;
+    } else {
+        // Normal oscillation around the current side’s midpoint
+        phase += phaseSpeed;
+        const center = (side === -1) ? sideMidNeg : sideMidPos;
+        wind = center + amplitude * Math.sin(phase);
+
+        // Occasionally (random chance) initiate a transition to the other side
+        // Adjust probability below to make switching more or less frequent
+        if (Math.random() < 0.05) {  // ~1% chance each frame
+            isTransitioning = true;
+            transitionProgress = 0;
+            transitionStart = wind;
+
+            // Flip side
+            side = -side;
+            transitionEnd = (side === -1) ? sideMidNeg : sideMidPos;
+        }
+    }
+
+    return wind;
 }
+
 
 canvas.addEventListener('click', (e) => {
     const rect = canvas.getBoundingClientRect();
