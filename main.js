@@ -177,6 +177,22 @@ class bubbleParticle {
 const windParticles = Array.from({ length: 100 }, () => new WindParticle());
 const bubbleParticles = Array.from({ length: 50 }, () => new bubbleParticle());
 
+function showPopup(message, x, y) {
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+    popup.textContent = message;
+    popup.style.left = `${x}px`;
+    popup.style.top = `${y}px`;
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+        popup.classList.add('fade-out');
+        setTimeout(() => {
+            document.body.removeChild(popup);
+        }, 1000);
+    }, 1000);
+}
+
 function saveGameState() {
     localStorage.setItem('gameState', JSON.stringify(gameData));
     console.log('Game saved!');
@@ -323,18 +339,21 @@ function gameLoop() {
             gameData.credits += bubble.currentValue * 0.5;
             updateCreditsDisplay();
             bubble.pop();
+            showPopup(`$${format(bubble.currentValue * 0.5)}`, bubble.x, bubble.y);
             return;
         }
         if (gameData.spikeLeft && bubble.x - bubble.radius < 0) {
             gameData.credits += bubble.currentValue * 0.5;
             updateCreditsDisplay();
             bubble.pop();
+            showPopup(`$${format(bubble.currentValue * 0.5)}`, bubble.x, bubble.y);
             return;
         }
         if (gameData.spikeRight && bubble.x + bubble.radius > canvas.width) {
             gameData.credits += bubble.currentValue * 0.5;
             updateCreditsDisplay();
             bubble.pop();
+            showPopup(`$${format(bubble.currentValue * 0.5)}`, bubble.x, bubble.y);
             return;
         }
 
@@ -366,6 +385,7 @@ canvas.addEventListener('click', (e) => {
             gameData.credits += bubble.currentValue;
             updateCreditsDisplay();
             bubble.pop();
+            showPopup(`$${format(bubble.currentValue)}`, mouseX, mouseY);
         }
     });
 });
