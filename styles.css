@@ -7,6 +7,7 @@ body {
 
 body.water {
   background: linear-gradient(to top, #2575fc, #87CEEB);
+  transition: background 0.5s ease;
 }
 
 #gameCanvas {

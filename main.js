@@ -106,6 +106,9 @@ class GameData {
         this.ascensionCostUpgrade1Cost = 1;
         this.ascensionCostUpgrade2Cost = 1;
 
+
+        this.waterLevel = 1.0;
+
         this.globalBaseValueMultiplier = 1;
         this.globalSpawnIntervalMultiplier = 1;
         this.globalRiseSpeedMultiplier = 1;
@@ -198,6 +201,7 @@ function loadGameState() {
         }
         updateCreditsDisplay();
         updateUpgradeButtons();
+        updateWaterBackground();
     }
 }
 

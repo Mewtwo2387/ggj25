@@ -27,6 +27,9 @@ const spikeupgradeButton = document.getElementById('spikeupgrade');
 const waterupgradeButton = document.getElementById('waterupgrade');
 const goldenupgradeButton = document.getElementById('goldenupgrade');
 
+
+const waterLevels = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0];
+
 blueUpgrade1Button.addEventListener('click', () => {
     if (gameData.credits >= gameData.blueUpgrade1Cost * gameData.globalCost1Multiplier) {
         gameData.credits -= gameData.blueUpgrade1Cost * gameData.globalCost1Multiplier;
@@ -237,12 +240,20 @@ spikeupgradeButton.addEventListener('click', () => {
     }
 });
 
+function updateWaterBackground() {
+    const waterLevel = gameData.waterLevel || 1.0;
+    const blueIntensity = Math.floor(135 + (120 * (waterLevel - 1.0))); // Adjust blue intensity based on water level
+    document.body.style.background = `linear-gradient(to top, #2575fc, rgb(0, 0, ${blueIntensity}))`;
+}
+
 waterupgradeButton.addEventListener('click', () => {
-    if (gameData.credits >= 100000 && !gameData.water) {
+    const currentLevelIndex = waterLevels.indexOf(gameData.waterLevel || 1.0);
+    if (currentLevelIndex < waterLevels.length - 1 && gameData.credits >= 100000) {
         gameData.credits -= 100000;
-        gameData.water = true;
+        gameData.waterLevel = waterLevels[currentLevelIndex + 1];
         updateCreditsDisplay();
         updateUpgradeButtons();
+        updateWaterBackground();
     }
 });
 
@@ -375,12 +386,14 @@ function updateUpgradeButtons() {
             'Unlock Top Spikes | Spikes will automatically break the bubble and get 50% credits';
         spikeupgradeButton.querySelector('.upgrade-header').innerHTML = 'Spikes Lv 0 ';
     }
-    if (gameData.water) {
-        document.body.classList.add('water');
+    if (gameData.waterLevel >= 2.0) {
         waterupgradeButton.disabled = true;
+        waterupgradeButton.querySelector('.upgrade-details').innerHTML = 'Water Level: MAX';
+        waterupgradeButton.querySelector('.upgrade-header').innerHTML = 'Water MAX';
     } else {
-        document.body.classList.remove('water');
         waterupgradeButton.disabled = false;
+        waterupgradeButton.querySelector('.upgrade-details').innerHTML = `Cost: $100,000<br>Water Level: ${gameData.waterLevel || 1.0}<br>Next: ${waterLevels[waterLevels.indexOf(gameData.waterLevel || 1.0) + 1]}`;
+        waterupgradeButton.querySelector('.upgrade-header').innerHTML = 'Better Water';
     }
     if (gameData.golden) {
         goldenupgradeButton.disabled = true;
