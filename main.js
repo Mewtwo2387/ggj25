@@ -217,6 +217,8 @@ function loadGameState() {
         }
         updateCredits();
         updateWaterBackground();
+    } else {
+        blueSpawnIntervalId = setInterval(spawnBlueBubble, gameData.blueSpawnInterval);
     }
 }
 
